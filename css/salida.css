@@ -1,0 +1,30 @@
+/* Salida OBS v1 · 1920x1080, fondo transparente */
+:root{--violeta:#5B2A9E;--magenta:#E6177F;--azul:#1FA8F0;--f:'Kanit','Montserrat','Arial Black',Impact,sans-serif}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent;font-family:var(--f)}
+body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/60px 60px}
+#escena{position:relative;width:1920px;height:1080px}
+.capa{position:absolute;inset:0}
+.entra{animation:entra .6s cubic-bezier(.2,.9,.25,1.1) both}.sale{animation:sale .45s ease-in both}
+@keyframes entra{from{opacity:0;transform:translateX(-120px) skewX(-8deg)}to{opacity:1;transform:none}}
+@keyframes sale{to{opacity:0;transform:translateX(-120px) skewX(-8deg)}}
+/* cartón */
+.carton{position:absolute;inset:0;background:var(--violeta);overflow:hidden;font-style:italic;font-weight:800;color:#fff;text-align:center}
+.carton.entra{animation:fade .5s both}.carton.sale{animation:fadeo .45s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes fadeo{to{opacity:0}}
+.rayos{position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.13) 0 4deg,transparent 4deg 10deg);animation:giro 60s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+.puntos{position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.18) 2.5px,transparent 3px)0 0/22px 22px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent 20%,#000 90%);mask:radial-gradient(circle at 50% 50%,transparent 20%,#000 90%)}
+.logo{position:absolute;left:0;right:0;top:70px;line-height:.9;text-shadow:6px 6px 0 var(--magenta)}
+.logo b{display:block;font-size:150px;letter-spacing:4px}.logo .f{font-size:190px;color:var(--azul);text-shadow:6px 6px 0 #fff}.logo i{display:inline-block;background:#111;border:4px solid #fff;padding:0 26px;font-size:46px}
+.lema{position:absolute;left:0;right:0;top:560px;font-size:64px;line-height:1}
+.lema span{display:inline-block;background:#1b1b6e;border:5px solid var(--azul);padding:4px 40px;transform:skewX(-8deg)}
+.lema em{display:block;font-size:190px;line-height:1;color:var(--magenta);-webkit-text-stroke:6px #fff;paint-order:stroke fill;text-shadow:8px 8px 0 #1b1b6e}
+.carton .mascota{position:absolute;left:90px;bottom:40px;width:380px;animation:flota 3s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-18px) rotate(3deg)}}
+/* título GC */
+.titulo{position:absolute;left:90px;bottom:250px;font-style:italic;font-weight:800;font-size:54px;color:#fff;text-transform:uppercase}
+.titulo span{display:inline-block;padding:10px 54px 10px 36px;background:var(--violeta);border-left:16px solid var(--c);transform:skewX(-10deg);box-shadow:8px 8px 0 var(--c)}
+/* GC nombre/cargo */
+.gc{position:absolute;left:90px;bottom:90px;font-style:italic;font-weight:800;color:#fff}
+.gc .nom{display:inline-block;font-size:68px;padding:6px 50px 6px 36px;background:linear-gradient(90deg,var(--violeta),#3d1a73);border-left:16px solid var(--c);transform:skewX(-10deg);box-shadow:8px 8px 0 rgba(0,0,0,.35)}
+.gc .car{display:table;margin-top:-2px;margin-left:34px;font-size:34px;padding:4px 36px;background:var(--c);color:#fff;transform:skewX(-10deg);text-transform:uppercase}
