@@ -1,8 +1,9 @@
-/* Firebase (claves públicas; la seguridad está en las reglas de la base). Completar lo que dice PENDIENTE_. */
+/* Firebase (claves públicas; la seguridad está en las reglas de la base). */
 window.FIREBASE_CONFIG={
-  apiKey:"PENDIENTE_API_KEY",
-  authDomain:"PENDIENTE_AUTH_DOMAIN",
+  apiKey:"AIzaSyBZpNX9jLbtxg6jhqydjkgZs07PnlqVBdw",
+  authDomain:"frikital-fest.firebaseapp.com",
   databaseURL:"https://frikital-fest-default-rtdb.firebaseio.com",
-  projectId:"PENDIENTE_PROJECT_ID",
-  appId:"PENDIENTE_APP_ID"
+  projectId:"frikital-fest",
+  appId:"1:255976856580:web:c270658d5f18f826a92951"
 };
+ 
