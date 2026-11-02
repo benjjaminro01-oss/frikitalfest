@@ -6,4 +6,3 @@ window.FIREBASE_CONFIG={
   projectId:"frikital-fest",
   appId:"1:255976856580:web:c270658d5f18f826a92951"
 };
- 

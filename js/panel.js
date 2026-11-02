@@ -7,21 +7,22 @@ const gs=()=>Estado.get().graficas.filter(g=>g.sn===stm);
 const G=id=>Estado.get().graficas.find(g=>g.id===id);
 const aire=g=>Estado.get().aire[g.tipo]===g.id;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const TIPO={carton:'CARTÓN',motion:'MOTION',titulo:'TÍTULO',gc:'GC',placa:'PLACA'};
+const TIPO={carton:'CARTÓN',motion:'MOTION',titulo:'TÍTULO',rotulo:'RÓTULO'};
+const LAB=(v,f)=>f==='a'?(v==='apoyo'?'Texto de apoyo':'Nombre'):(v==='apoyo'?'Encabezado (opcional)':'Cargo');
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2600);}
 const bcPrev=new BroadcastChannel('frk_'+VER+'prev');let pv=null;
-function aplicar(id){const card=document.querySelector(`.gr[data-gid="${id}"]`);if(!card)return;Estado.mut(s=>{const g=s.graficas.find(x=>x.id===id);card.querySelectorAll('[data-f]').forEach(i=>{if(i.dataset.f==='color')g.color=i.value;else g.t[i.dataset.f]=i.value;});});}
+function aplicar(id){const card=document.querySelector(`.gr[data-gid="${id}"]`);if(!card)return;Estado.mut(s=>{const g=s.graficas.find(x=>x.id===id);card.querySelectorAll('[data-f]').forEach(i=>{if(i.dataset.f==='color')g.color=i.value;else if(i.dataset.f==='var')g.var=i.value;else g.t[i.dataset.f]=i.value;});});}
 function mostrar(id,conEdicion){const g=G(id);if(conEdicion)aplicar(id);const x=G(id);if(x.pend){toast(x.pend+': no sale al aire');return;}if(pend(x)){toast('Tiene marcador PENDIENTE_: no se muestra en pantalla. Complétalo antes.');return;}Estado.mostrar(id);}
 const toggle=id=>{const g=G(id);aire(g)?Estado.ocultar(g.tipo):mostrar(id,false);};
 function prev(id){aplicar(id);const s=Estado.get(),g=G(id);pv={...Estado.get(),aire:{[g.tipo]:g.id}};bcPrev.postMessage(pv);toast('Vista previa: '+g.nombre);}
 function paso(d){const p=ESC.find(e=>e.n===stm).p;Estado.mut(s=>{const i=(s.paso.n===stm?s.paso.i:0)+d;s.paso={n:stm,i:Math.max(0,Math.min(p.length-1,i))};});}
 function monitores(){return `<div class="mons"><div class="mon"><h4>VISTA PREVIA · solo operador</h4><div class="v"><iframe data-sc src="salida.html?canal=prev&cuadros"></iframe></div></div><div class="mon al"><h4>● AL AIRE</h4><div class="v"><iframe data-sc src="salida.html?cuadros${(location.search.match(/sala=[\w-]+/)||[''])[0]?'&'+location.search.match(/sala=[\w-]+/)[0]:''}"></iframe></div></div></div>`;}
 function escaleta(){const p=ESC.find(e=>e.n===stm).p,ps=Estado.get().paso,cur=ps.n===stm?ps.i:-1;return `<div class="col"><h3>Escaleta · Streaming ${stm}<button data-act="ant">◀ Re Pág</button><button data-act="sig">Av Pág ▶</button></h3><div class="esc">${p.map((x,i)=>`<div class="st ${i===cur?'on':''}" data-paso="${i}"><span class="tc">${esc(x.tc)} · ${esc(x.d)}</span><b>${esc(x.b)}</b> <span class="n">${esc(x.cam)}</span><p class="g">${esc(x.gr)}</p><p class="tx">${esc(x.tx)}</p><p class="n">${esc(x.nt)}</p></div>`).join('')}</div></div>`;}
-function tarjeta(g){const t=g.t||{},ed=g.tipo==='gc'||g.tipo==='titulo'||g.tipo==='placa';
+function tarjeta(g){const t=g.t||{},ed=g.tipo==='rotulo'||g.tipo==='titulo',ro=g.tipo==='rotulo';
  return `<div class="gr ${aire(g)?'air':''}" data-gid="${g.id}"><div class="gh"><i class="dot"></i><b>${esc(g.nombre)}</b><span class="tag">${TIPO[g.tipo]}</span><span class="tag">${esc(g.tecla)}</span>${pend(g)?'<span class="tag pend">PENDIENTE</span>':''}</div>
- ${ed?`<div class="gt"><input data-f="a" value="${esc(t.a)}" aria-label="Texto principal">${g.tipo==='gc'?`<input data-f="b" value="${esc(t.b)}" aria-label="Cargo">`:''}</div>`:''}
+ ${ro?`<div class="gt"><label class="lb"><span data-l="a">${LAB(g.var,'a')}</span><input data-f="a" value="${esc(t.a)}"></label><label class="lb"><span data-l="b">${LAB(g.var,'b')}</span><input data-f="b" value="${esc(t.b)}"></label></div>`:ed?`<div class="gt"><input data-f="a" value="${esc(t.a)}" aria-label="Texto"></div>`:''}
  ${g.nota?`<p class="nota">⚠ ${esc(g.nota)}</p>`:''}${g.pend?`<p class="nota">⚠ ${esc(g.pend)}</p>`:''}
- <div class="gb"><button class="ok" data-act="show">MOSTRAR</button><button class="no" data-act="hide">OCULTAR</button><button data-act="upd">ACTUALIZAR</button><button data-act="prev">PREV</button>${ed?`<select data-f="color"><option value="azul" ${g.color==='azul'?'selected':''}>Azul</option><option value="magenta" ${g.color==='magenta'?'selected':''}>Magenta</option></select>`:''}</div></div>`;}
+ <div class="gb"><button class="ok" data-act="show">MOSTRAR</button><button class="no" data-act="hide">OCULTAR</button><button data-act="upd">ACTUALIZAR</button><button data-act="prev">PREV</button>${ro?`<select data-f="var" aria-label="Tipo de rótulo"><option value="gc" ${g.var!=='apoyo'?'selected':''}>Nombre GC</option><option value="apoyo" ${g.var==='apoyo'?'selected':''}>Apoyo de texto</option></select>`:''}${ed?`<select data-f="color"><option value="azul" ${g.color==='azul'?'selected':''}>Azul</option><option value="magenta" ${g.color==='magenta'?'selected':''}>Magenta</option></select>`:''}</div></div>`;}
 function botonera(){return `<div class="bar"><button data-act="edit" class="${edit?'on':''}">${edit?'Terminar edición':'Editar botonera'}</button><span class="n">${edit?'Toca el recuadro de tecla y pulsa la tecla deseada (F13–F24 o cualquiera).':'Toca para mostrar; vuelve a tocar para ocultar. Rojo = al aire.'}</span></div><div class="bots">${gs().map(g=>`<div><button class="bt ${aire(g)?'air':''} ${pend(g)?'pd':''}" data-gid="${g.id}" data-act="tog"><span class="k">${esc(g.tecla)}</span><b>${esc(g.nombre)}</b><small>${esc(g.t.a||'')}</small></button>${edit?`<input class="kin" data-kin="${g.id}" readonly value="${esc(g.tecla)}">`:''}</div>`).join('')}</div>`;}
 function render(){const v=disp()==='botonera'?'botonera':vista,s=Estado.get();
  document.body.dataset.solo=disp()==='botonera'?'1':'0';
@@ -67,3 +68,5 @@ $('#dlg').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if
  if(e.target.id==='exp'){const u=URL.createObjectURL(new Blob([JSON.stringify(Estado.get(),null,1)],{type:'application/json'}));Object.assign(document.createElement('a'),{href:u,download:'frikital-cg-copia.json'}).click();}
  if(e.target.id==='imp')$('#arch').click();});
 $('#dlg').addEventListener('change',e=>{if(e.target.id==='tema')Estado.mut(s=>{s.tema=e.target.value;});if(e.target.id==='arch'){const f=e.target.files[0];if(f)f.text().then(t=>{try{Estado.recibir(JSON.parse(t));toast('Copia restaurada');}catch(x){toast('Archivo no válido');}});}});
+
+document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.f==='var'){const c=e.target.closest('.gr');c.querySelectorAll('[data-l]').forEach(s=>s.textContent=LAB(e.target.value,s.dataset.l));}});

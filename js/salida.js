@@ -8,8 +8,8 @@ function plantilla(g){
   const col=`var(--${g.color||'magenta'})`;
   if(g.tipo==='carton')return `<div class="carton t-${Estado.get().tema||'turquesa'}"><div class="rayos"></div><div class="rayos r2"></div><div class="puntos"></div><div class="destello"></div>${estrellas(26)}<div class="luna"></div><div class="rb r1">${RAYO('#E6177F')}</div><div class="rb r2">${RAYO('#1FA8F0')}</div><div class="rb r3">${RAYO('#E6177F')}</div><div class="rb r4">${RAYO('#1FA8F0')}</div><div class="logo"><svg viewBox="0 0 ${LOGO.w} ${LOGO.h}"><path class="la" fill-rule="evenodd" d="${LOGO.A}"/><path class="lf" fill-rule="evenodd" d="${LOGO.F}"/></svg><i>2026</i></div><div class="lema"><span class="l1">TU AVENTURA</span><em>GEEK</em><span class="l2">COMIENZA AQUÍ</span></div>${mascota(g)}<div class="pie">SÁBADO 7 DE NOVIEMBRE · SANTO TOMÁS TALCA</div></div>`;
   if(g.tipo==='titulo')return `<div class="titulo" style="--c:${col}"><div class="ic">${RAYO('#fff')}</div><div class="placa"><span>${esc(t.a)}</span></div><div class="subraya"></div><b class="st" style="right:-30px;top:-26px;--s:34px"></b><b class="st" style="right:40px;top:-40px;--s:20px;animation-delay:.6s"></b></div>`;
-  if(g.tipo==='placa')return `<div class="placad" style="--c:${col}"><span>${esc(t.a)}</span></div>`;
-  if(g.tipo==='gc')return `<div class="gc" style="--c:${col}"><div class="av">${CARA}</div><div class="cuerpo"><div class="nom"><span>${esc(t.a)}</span></div><div class="car"><span>${esc(t.b||'')}</span><div class="rayo2">${RAYO('#fff')}</div></div></div></div>`;
+  if(g.tipo==='rotulo'&&g.var==='apoyo')return `<div class="apoyo" style="--c:${col}">${t.b?`<div class="ah"><span>${esc(t.b)}</span></div>`:''}<div class="at"><span>${esc(t.a)}</span></div></div>`;
+  if(g.tipo==='rotulo')return `<div class="gc" style="--c:${col}"><div class="av">${CARA}</div><div class="cuerpo"><div class="nom"><span>${esc(t.a)}</span></div><div class="car"><span>${esc(t.b||'')}</span><div class="rayo2">${RAYO('#fff')}</div></div></div></div>`;
   return null;
 }
 const capas={},actual={};

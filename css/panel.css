@@ -27,3 +27,4 @@ dialog{background:var(--bg);color:var(--t);border:1px solid var(--l);border-radi
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.tabs button[disabled]{opacity:.45}.fila{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}.mono{font:12px ui-monospace,monospace;word-break:break-all;background:#000;padding:6px;border-radius:6px;display:block}
 body[data-solo="1"] #vistas{display:none}.bots>div>.bt{width:100%}
 #mons{position:sticky;top:64px;z-index:4;background:var(--bg);padding:0 14px}.mons{padding:6px 0 8px;margin:0 0 8px;border-bottom:1px solid var(--l)}.mon{max-width:440px;min-width:240px}
+.lb{display:grid;gap:2px}.lb span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.7}
