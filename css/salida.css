@@ -73,3 +73,6 @@ body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/6
 @keyframes caerl{from{opacity:0;transform:translateY(-90px) scale(1.25)}}
 .brazo{transform-box:fill-box;transform-origin:60% 100%;animation:saluda 3s 2.2s ease-in-out infinite}@keyframes saluda{50%{transform:rotate(-6deg)}}
 .t-turquesa{--logosh:#04415a}
+
+.placad{position:absolute;right:90px;bottom:90px;max-width:1000px;font-style:italic;font-weight:900;color:#fff}
+.placad span{display:block;background:linear-gradient(100deg,#2c1259,#5B2A9E);border:5px solid #fff;border-right:0;padding:12px 50px 12px 44px;font-size:46px;line-height:1.15;transform:skewX(-10deg);box-shadow:-10px 10px 0 var(--c);animation:wipe .6s var(--e) both}
