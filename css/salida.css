@@ -1,30 +1,75 @@
-/* Salida OBS v1 · 1920x1080, fondo transparente */
-:root{--violeta:#5B2A9E;--magenta:#E6177F;--azul:#1FA8F0;--f:'Kanit','Montserrat','Arial Black',Impact,sans-serif}
-html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent;font-family:var(--f)}
+/* Salida OBS v2 · 1920x1080 transparente · línea cómic/pop Frikital */
+:root{--bg:radial-gradient(ellipse at 50% 42%,#9358d8 0,#5B2A9E 36%,#2c1259 100%);--dots:rgba(230,23,127,.55);--m:#B8349A;--m2:#962e79;--m3:#6e1f59;--logosh:#1b0a3d;--violeta:#5B2A9E;--oscuro:#2c1259;--magenta:#E6177F;--azul:#1FA8F0;--f:'Saira','Poppins','Montserrat','Arial Black',Impact,sans-serif;--e:cubic-bezier(.2,.9,.2,1.08)}
+html,body{font-stretch:125%;margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent;font-family:var(--f)}
 body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/60px 60px}
-#escena{position:relative;width:1920px;height:1080px}
-.capa{position:absolute;inset:0}
-.entra{animation:entra .6s cubic-bezier(.2,.9,.25,1.1) both}.sale{animation:sale .45s ease-in both}
-@keyframes entra{from{opacity:0;transform:translateX(-120px) skewX(-8deg)}to{opacity:1;transform:none}}
-@keyframes sale{to{opacity:0;transform:translateX(-120px) skewX(-8deg)}}
-/* cartón */
-.carton{position:absolute;inset:0;background:var(--violeta);overflow:hidden;font-style:italic;font-weight:800;color:#fff;text-align:center}
-.carton.entra{animation:fade .5s both}.carton.sale{animation:fadeo .45s both}
-@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes fadeo{to{opacity:0}}
-.rayos{position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.13) 0 4deg,transparent 4deg 10deg);animation:giro 60s linear infinite}
+#escena,.capa{position:absolute;inset:0;width:1920px;height:1080px}
+.sale{animation:sale .45s ease-in both}@keyframes sale{to{opacity:0;transform:translateX(-90px) skewX(-8deg)}}
+.carton.sale{animation:fadeo .5s both}@keyframes fadeo{to{opacity:0}}
+.st{position:absolute;width:var(--s);height:var(--s);background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+.rayo{width:100%;height:100%;filter:drop-shadow(5px 5px 0 rgba(0,0,0,.3))}
+/* ===== CARTÓN ===== */
+.carton{position:absolute;inset:0;overflow:hidden;font-style:italic;font-weight:900;color:#fff;text-align:center;background:var(--bg);animation:fade .6s both}
+@keyframes fade{from{opacity:0}}
+.rayos{position:absolute;inset:-60%;background:repeating-conic-gradient(rgba(255,255,255,.15) 0 3.5deg,transparent 3.5deg 11deg);-webkit-mask:radial-gradient(circle,#000 0,transparent 62%);mask:radial-gradient(circle,#000 0,transparent 62%);animation:giro 90s linear infinite}
+.rayos.r2{background:repeating-conic-gradient(rgba(31,168,240,.22) 0 2deg,transparent 2deg 17deg);animation-direction:reverse;animation-duration:140s}
 @keyframes giro{to{transform:rotate(360deg)}}
-.puntos{position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.18) 2.5px,transparent 3px)0 0/22px 22px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent 20%,#000 90%);mask:radial-gradient(circle at 50% 50%,transparent 20%,#000 90%)}
-.logo{position:absolute;left:0;right:0;top:70px;line-height:.9;text-shadow:6px 6px 0 var(--magenta)}
-.logo b{display:block;font-size:150px;letter-spacing:4px}.logo .f{font-size:190px;color:var(--azul);text-shadow:6px 6px 0 #fff}.logo i{display:inline-block;background:#111;border:4px solid #fff;padding:0 26px;font-size:46px}
-.lema{position:absolute;left:0;right:0;top:560px;font-size:64px;line-height:1}
-.lema span{display:inline-block;background:#1b1b6e;border:5px solid var(--azul);padding:4px 40px;transform:skewX(-8deg)}
-.lema em{display:block;font-size:190px;line-height:1;color:var(--magenta);-webkit-text-stroke:6px #fff;paint-order:stroke fill;text-shadow:8px 8px 0 #1b1b6e}
-.carton .mascota{position:absolute;left:90px;bottom:40px;width:380px;animation:flota 3s ease-in-out infinite}
-@keyframes flota{50%{transform:translateY(-18px) rotate(3deg)}}
-/* título GC */
-.titulo{position:absolute;left:90px;bottom:250px;font-style:italic;font-weight:800;font-size:54px;color:#fff;text-transform:uppercase}
-.titulo span{display:inline-block;padding:10px 54px 10px 36px;background:var(--violeta);border-left:16px solid var(--c);transform:skewX(-10deg);box-shadow:8px 8px 0 var(--c)}
-/* GC nombre/cargo */
-.gc{position:absolute;left:90px;bottom:90px;font-style:italic;font-weight:800;color:#fff}
-.gc .nom{display:inline-block;font-size:68px;padding:6px 50px 6px 36px;background:linear-gradient(90deg,var(--violeta),#3d1a73);border-left:16px solid var(--c);transform:skewX(-10deg);box-shadow:8px 8px 0 rgba(0,0,0,.35)}
-.gc .car{display:table;margin-top:-2px;margin-left:34px;font-size:34px;padding:4px 36px;background:var(--c);color:#fff;transform:skewX(-10deg);text-transform:uppercase}
+.puntos{position:absolute;inset:0;background:radial-gradient(var(--dots) 3px,transparent 3.5px)0 0/20px 20px;-webkit-mask:radial-gradient(ellipse at 50% 45%,transparent 38%,#000 100%);mask:radial-gradient(ellipse at 50% 45%,transparent 38%,#000 100%)}
+.destello{position:absolute;left:50%;top:26%;width:1100px;height:1100px;margin:-550px;border-radius:50%;background:radial-gradient(#fff6,#1FA8F033 40%,transparent 68%);animation:pulso 3.2s ease-in-out infinite}
+@keyframes pulso{50%{transform:scale(1.12);opacity:.7}}
+.luna{position:absolute;right:120px;bottom:120px;width:84px;height:84px;border-radius:50%;box-shadow:-22px 8px 0 0 #fff;transform:rotate(-20deg);animation:tw 4s infinite}
+.rb{position:absolute;animation:rbin .55s var(--e) both,fl 3s 1.5s infinite}
+.r1{left:-10px;top:40px;width:120px;height:220px;transform:rotate(18deg);animation-delay:.9s,0s}.r2{right:60px;top:20px;width:150px;height:270px;transform:rotate(-14deg);animation-delay:1s,0s}
+.r3{right:-10px;bottom:300px;width:110px;height:200px;transform:rotate(24deg);animation-delay:1.1s,0s}.r4{left:520px;bottom:30px;width:90px;height:160px;transform:rotate(-30deg);animation-delay:1.2s,0s}
+@keyframes rbin{from{opacity:0;scale:2}}@keyframes fl{0%,90%,100%{filter:none}93%{filter:brightness(2.2)}96%{filter:none}98%{filter:brightness(2)}}
+.logo{position:absolute;left:0;right:0;top:34px;line-height:.86}
+.logo b{display:block;-webkit-text-stroke:11px #1b0a3d;paint-order:stroke fill;animation:caer .8s var(--e) both}
+.logo .a{font-size:176px;letter-spacing:6px;text-shadow:0 12px 0 #1b0a3d,0 0 50px #1FA8F0aa}
+.logo .f{font-size:236px;color:var(--azul);-webkit-text-stroke:12px #fff;text-shadow:5px 5px 0 #0b5d99,10px 10px 0 #0b5d99,15px 15px 0 #0b5d99,0 0 60px #1FA8F0;animation-delay:.25s;letter-spacing:10px}
+.logo i{display:inline-block;margin-top:12px;background:#0a0a12;border:5px solid #fff;padding:0 34px;font-size:52px;box-shadow:7px 7px 0 var(--magenta);animation:caer .6s .6s var(--e) both}
+@keyframes caer{from{opacity:0;transform:translateY(-260px) scale(1.4) skewX(-12deg)}}
+.lema{position:absolute;left:0;right:0;top:575px;font-size:66px;line-height:1}
+.lema span{display:inline-block;background:#1b1b6e;border:6px solid var(--azul);padding:4px 44px;box-shadow:8px 8px 0 #0a0a3a}
+.lema .l1{transform:skewX(-8deg);animation:izq .6s .9s var(--e) both}.lema .l2{transform:skewX(-8deg);animation:izq .6s 1.25s var(--e) both}
+@keyframes izq{from{opacity:0;translate:-700px}}
+.lema em{display:block;font-size:210px;line-height:.95;color:var(--magenta);-webkit-text-stroke:9px #fff;paint-order:stroke fill;text-shadow:10px 10px 0 #1b1b6e,0 0 50px #E6177F;animation:boom .7s 1.05s var(--e) both}
+@keyframes boom{from{opacity:0;scale:3.5;rotate:-8deg}60%{scale:.92}}
+.carton .mascota{position:absolute;left:30px;bottom:0;width:560px;filter:drop-shadow(10px 12px 0 rgba(0,0,0,.28));animation:sube .9s 1.4s var(--e) both,flota 3.4s 2.3s ease-in-out infinite}
+@keyframes sube{from{translate:0 500px;rotate:-14deg}}@keyframes flota{50%{translate:0 -20px;rotate:3deg}}
+.ojos{animation:parp 4.5s 3s infinite;transform-origin:120px 118px;transform-box:fill-box}@keyframes parp{94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.pie{position:absolute;right:0;left:0;bottom:46px;font-size:34px;letter-spacing:3px;animation:izq .6s 1.7s var(--e) both}
+.pie{width:max-content;margin:auto;background:var(--magenta);padding:4px 44px;transform:skewX(-8deg);box-shadow:6px 6px 0 #1b0a3d}
+/* ===== TÍTULO GC ===== */
+.titulo{position:absolute;left:90px;bottom:330px;font-style:italic;font-weight:900;color:#fff}
+.titulo .placa{position:relative;background:linear-gradient(100deg,#2c1259,#5B2A9E);border:5px solid #fff;padding:6px 74px 6px 96px;font-size:58px;letter-spacing:2px;text-transform:uppercase;transform:skewX(-10deg);box-shadow:10px 10px 0 var(--c);animation:wipe .6s var(--e) both}
+.titulo .placa span{display:inline-block;text-shadow:4px 4px 0 var(--c);animation:sube2 .5s .3s var(--e) both}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(-20px -20px -20px -20px)}}@keyframes sube2{from{opacity:0;translate:0 60px}}
+.titulo .ic{position:absolute;left:-26px;top:-30px;width:70px;height:112px;z-index:2;rotate:12deg;animation:pop .5s .15s var(--e) both}
+.titulo .ic .rayo{filter:drop-shadow(0 0 0 #000) drop-shadow(5px 5px 0 var(--c))}
+@keyframes pop{from{scale:0;rotate:-40deg}}
+.titulo .subraya{height:10px;margin:18px 0 0 40px;width:520px;background:var(--c);transform:skewX(-10deg);transform-origin:left;animation:crece .7s .5s var(--e) both}@keyframes crece{from{scale:0 1}}
+/* ===== GC NOMBRE / CARGO ===== */
+.gc{position:absolute;left:90px;bottom:90px;display:flex;align-items:flex-end;font-style:italic;font-weight:900;color:#fff}
+.gc .av{position:relative;z-index:3;width:190px;height:190px;margin-right:-44px;margin-bottom:-6px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#9358d8,#2c1259);border:8px solid #fff;box-shadow:0 0 0 8px var(--c),12px 12px 0 8px rgba(0,0,0,.35);overflow:hidden;animation:pop .6s .05s var(--e) both}
+.gc .cara{width:100%;height:100%;translate:0 4px;animation:flota 3.4s 1s ease-in-out infinite}
+.gc .nom{position:relative;overflow:hidden;font-size:72px;line-height:1.15;padding:10px 78px 10px 70px;background:linear-gradient(100deg,#6c34b3,#2c1259);border-left:20px solid var(--c);clip-path:polygon(0 0,100% 0,calc(100% - 30px) 100%,0 100%);animation:barra .6s .15s var(--e) both}
+.gc .nom::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.16) 3px,transparent 3.5px)0 0/16px 16px}
+.gc .nom::after{content:"";position:absolute;top:0;bottom:0;width:90px;background:linear-gradient(100deg,transparent,#fff9,transparent);left:-140px;animation:brillo 1.1s 1.1s ease-out both}
+@keyframes brillo{to{left:110%}}
+.gc .nom span{position:relative;display:inline-block;animation:sube2 .55s .45s var(--e) both}
+.gc .car{position:relative;margin-left:50px;width:max-content;font-size:36px;letter-spacing:1px;text-transform:uppercase;padding:6px 96px 6px 34px;background:var(--c);clip-path:polygon(0 0,100% 0,calc(100% - 24px) 100%,0 100%);transform-origin:left;animation:barra .55s .4s var(--e) both}
+.gc .car span{display:inline-block;animation:sube2 .5s .7s var(--e) both}
+.gc .rayo2{position:absolute;right:34px;top:2px;width:26px;height:44px;animation:fl 2.5s 2s infinite}
+@keyframes barra{from{clip-path:polygon(0 0,0 0,0 100%,0 100%)}}
+
+.m1{fill:var(--m)}.m2{fill:var(--m2)}.m3{fill:var(--m3)}
+/* tema turquesa (promo): paleta muestreada del cartón actual */
+.t-turquesa{--bg:radial-gradient(ellipse at 50% 42%,#1db4d6 0,#0076a7 38%,#085571 100%);--dots:rgba(255,255,255,.3);--m:#B8349A;--m2:#962e79;--m3:#6e1f59}
+.t-turquesa .rayos{background:repeating-conic-gradient(rgba(255,255,255,.2) 0 2.5deg,transparent 2.5deg 12deg)}
+.t-turquesa .destello{background:radial-gradient(#fff7,#8fe3ff33 40%,transparent 68%)}
+
+.logo svg{display:block;width:1180px;margin:0 auto;overflow:visible;filter:drop-shadow(0 8px 0 var(--logosh)) drop-shadow(0 0 40px #8fe3ffaa)}
+.logo path{fill:#fff;transform-box:fill-box;transform-origin:center;animation:caerl .8s var(--e) both}.logo .lf{animation-delay:.25s}
+@keyframes caerl{from{opacity:0;transform:translateY(-90px) scale(1.25)}}
+.brazo{transform-box:fill-box;transform-origin:60% 100%;animation:saluda 3s 2.2s ease-in-out infinite}@keyframes saluda{50%{transform:rotate(-6deg)}}
+.t-turquesa{--logosh:#04415a}

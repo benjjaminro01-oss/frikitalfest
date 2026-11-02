@@ -1,7 +1,8 @@
 /* Frikital CG · núcleo compartido v1 */
-const VER='1';
+const VER='2';
 const DEF={graficas:[
 {id:'carton_inicio',nombre:'Cartón inicio',tipo:'carton',tecla:'F13',t:{}},
+{id:'carton_turquesa',nombre:'Cartón inicio · turquesa',tipo:'carton',tecla:'F13',tema:'turquesa',gafas:true,t:{}},
 {id:'s1_titulo',nombre:'S1 · Título GC',tipo:'titulo',tecla:'F15',color:'magenta',t:{a:'FRIKITAL FEST 2026 · EN VIVO'}},
 {id:'s1_conductor',nombre:'S1 · Conductor/a',tipo:'gc',tecla:'F16',color:'azul',t:{a:'PENDIENTE_NOMBRE_CONDUCTOR',b:'CONDUCTOR/A'}},
 {id:'s3_dario',nombre:'S3 · Darío Cuesta',tipo:'gc',tecla:'F16',color:'azul',t:{a:'Darío Cuesta',b:'DIRECTOR NACIONAL · COMUNICACIÓN Y DISEÑO'}}
