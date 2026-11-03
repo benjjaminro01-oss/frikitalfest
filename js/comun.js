@@ -11,11 +11,11 @@ const S=[
 {n:7,tit:'CEREMONIA DE PREMIACIÓN',gc:[['Jorge Córdova Pacheco','DIRECTOR DE CARRERA · DISEÑO GRÁFICO','Jorge Córdova Pacheco','Confirmar cargo']],pl:[['PENDIENTE_CATEGORIA','Categoría'],['PENDIENTE_GANADOR','Ganador/a (según acta oficial)'],['PENDIENTE_FOTO_GRUPAL','Foto grupal']]}];
 function armar(){const g=[];S.forEach(s=>{const p='s'+s.n+'_',ad=(id,nombre,tipo,tecla,t,x)=>g.push({id:p+id,nombre,tipo,tecla,sn:s.n,t,...x}),f=s.n===7;
  ad('ci','Cartón inicio','carton','F13',{});
- ad('ma','Motion apertura','motion','F14',{},{pend:'Archivo de video pendiente'});
+ ad('ma','Motion apertura','motion','F14',{src:'PENDIENTE_ARCHIVO_MOTION_APERTURA'},{fondo:'alfa',fin:'ocultar',nota:'Archivo pendiente: súbelo a la carpeta media de GitHub y elígelo aquí'});
  ad('tit','Título GC','titulo','F15',{a:s.tit},{color:'magenta'});
  s.gc.forEach((x,i)=>ad('gc'+(i+1),x[2],'rotulo',['F16','F17','F18'][i],{a:x[0],b:x[1]},{var:'gc',color:'azul',nota:x[3]}));
  s.pl.forEach((x,i)=>ad('pl'+(i+1),x[1],'rotulo',['F19','F22','F23'][i],{a:x[0],b:x[2]||''},{var:'apoyo',color:'azul'}));
- ad('mc',f?'Motion final':'Motion cierre','motion','F20',{},{pend:'Archivo de video pendiente'});
+ ad('mc',f?'Motion final':'Motion cierre','motion','F20',{src:'PENDIENTE_ARCHIVO_'+(f?'MOTION_FINAL':'MOTION_CIERRE')},{fondo:'alfa',fin:'ocultar',nota:'Archivo pendiente: súbelo a la carpeta media de GitHub y elígelo aquí'});
  ad('cc',f?'Cartón final':'Cartón cierre','carton','F21',{},f?{nota:'Cartón final con logos: pendiente de diseño y orden de logos'}:{});});return g;}
 const DEF={graficas:armar(),aire:{},tema:'turquesa',paso:{n:1,i:0},ver:VER};
 const Estado=(()=>{

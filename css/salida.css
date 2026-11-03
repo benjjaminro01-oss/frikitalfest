@@ -81,3 +81,7 @@ body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/6
 .apoyo .ah{margin-left:36px;width:max-content}.apoyo .ah span{display:block;background:var(--c);font-size:34px;letter-spacing:1px;text-transform:uppercase;padding:6px 64px 6px 30px;clip-path:polygon(0 0,100% 0,calc(100% - 24px) 100%,0 100%);animation:barra .5s .1s var(--e) both}
 .apoyo .at span{display:block;position:relative;overflow:hidden;font-size:50px;line-height:1.15;padding:12px 90px 12px 46px;background:linear-gradient(100deg,#6c34b3,#2c1259);border-left:20px solid var(--c);clip-path:polygon(0 0,100% 0,calc(100% - 30px) 100%,0 100%);animation:barra .6s .2s var(--e) both}
 .apoyo .at span::after{content:"";position:absolute;top:0;bottom:0;width:90px;background:linear-gradient(100deg,transparent,#fff9,transparent);left:-140px;animation:brillo 1.1s 1s ease-out both}
+
+.mov{position:absolute;inset:0}.mov video,.mov img,.mov canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:contain}
+.mov.entra{animation:fade .4s both}.mov.sale{animation:fadeo .4s both}
+.capa-carton{z-index:1}.capa-motion{z-index:4}.capa-titulo,.capa-rotulo{z-index:6}
