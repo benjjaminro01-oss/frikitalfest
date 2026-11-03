@@ -29,5 +29,5 @@ const Estado=(()=>{
     recibir(o){o.aire=o.aire||{};o.paso=o.paso||{n:1,i:0};o.graficas=(Array.isArray(o.graficas)?o.graficas:Object.values(o.graficas)).map(g=>({...g,t:g.t||{}}));s=o;if(!CANAL)localStorage.setItem(K,JSON.stringify(s));bc.postMessage(s);emit();},
     mut(fn){fn(s);guardar();},
     mostrar(id){const g=s.graficas.find(x=>x.id===id);if(g){s.aire[g.tipo]=id;guardar();}},
-    ocultar(tipo){delete s.aire[tipo];guardar();},limpiar(){s.aire={};guardar();}};
+    ocultar(tipo){delete s.aire[tipo];guardar();},limpiar(){s.aire={};guardar();},quitarLocal(tipo){delete s.aire[tipo];emit();}};
 })();

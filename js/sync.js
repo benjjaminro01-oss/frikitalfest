@@ -9,6 +9,7 @@
     await L(B+'app-compat.js');await L(B+'auth-compat.js');await L(B+'database-compat.js');
     firebase.initializeApp(c);await firebase.auth().signInAnonymously();
     const ref=firebase.database().ref('salas/'+sala+'/estado'),limpio=s=>JSON.parse(JSON.stringify(s));
+    Estado.quitarAire=t=>{Estado.quitarLocal(t);ref.child('aire/'+t).remove();};
     Estado.onGuardar(s=>ref.set(limpio(s)));
     ref.on('value',sn=>{const v=sn.val();if(v&&v.ver===VER)Estado.recibir(v);else ref.set(limpio(Estado.get()));});
     Estado.modo='en línea · sala '+sala.slice(0,4)+'…';

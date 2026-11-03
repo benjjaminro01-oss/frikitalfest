@@ -14,8 +14,11 @@ function plantilla(g){
   return null;
 }
 const capas={},actual={};
-function montar(c,g){const v=c.querySelector('video');if(!v)return;
-  v.onended=()=>{if(g.fin!=='mantener'&&Estado.get().aire[g.tipo]===g.id)Estado.ocultar(g.tipo);};
+function fin(g){if(g.fin==='mantener'||Estado.get().aire[g.tipo]!==g.id)return;(Estado.quitarAire||Estado.ocultar)(g.tipo);}
+const pre={};function precargar(s){if(CANAL||/mudo/.test(location.search))return;s.graficas.forEach(g=>{const n=g.tipo==='motion'&&g.t&&g.t.src;if(!n||/PENDIENTE_/.test(n)||pre[n]||/\.(png|jpe?g|webp|gif|svg)$/i.test(n))return;pre[n]=1;const v=document.createElement('video');v.preload='auto';v.muted=true;v.style.display='none';v.src='media/'+encodeURIComponent(n);document.body.appendChild(v);});}
+function montar(c,g){const v=c.querySelector('video');if(!v)return;let hecho=false;const f=()=>{if(hecho)return;hecho=true;fin(g);};
+  v.onended=f;v.onerror=()=>{console.warn('Video no reproducible:',g.t.src);f();};
+  v.ontimeupdate=()=>{if(v.duration&&v.currentTime>=v.duration-0.08)f();};
   if(/mudo/.test(location.search))v.muted=true;
   v.play().catch(()=>{v.muted=true;v.play().catch(()=>{});});
   if(g.fondo==='verde'){const cv=document.createElement('canvas');cv.width=960;cv.height=540;v.after(cv);v.style.cssText='position:absolute;opacity:0;width:2px;height:2px';
@@ -27,6 +30,7 @@ function capa(tipo){return capas[tipo]||(capas[tipo]=document.getElementById('es
 function salir(el,fn){if(!el)return fn();el.classList.add('sale');setTimeout(()=>{el.remove();fn();},450);}
 function poner(tipo,g){const c=capa(tipo),h=plantilla(g);if(!h)return;c.innerHTML='';c.insertAdjacentHTML('beforeend',h);c.firstElementChild.classList.add('entra');montar(c,g);actual[tipo]=g.id+'|'+(Estado.get().tema||'')+JSON.stringify(g.t);}
 Estado.sub(s=>{
+  precargar(s);
   new Set([...Object.keys(actual),...Object.keys(s.aire)]).forEach(tipo=>{
     const g=s.graficas.find(x=>x.id===s.aire[tipo]),key=g&&g.id+'|'+(s.tema||'')+JSON.stringify(g.t),c=capa(tipo);
     if(actual[tipo]===key)return;
