@@ -1,5 +1,7 @@
 /* Frikital CG · núcleo compartido v4 */
-const VER='5',CANAL=new URLSearchParams(location.search).get('canal')||'';
+const VER='6',CANAL=new URLSearchParams(location.search).get('canal')||'';
+const CARTON_DEF='carton_inicio_web.mp4';
+function cartonDe(g,s){const t=g.t||{};if(t.src&&!/PENDIENTE_/.test(t.src))return t.src;if(/_cc$/.test(g.id))return s.cartonCierre===undefined?CARTON_DEF:s.cartonCierre;return s.cartonSrc===undefined?CARTON_DEF:s.cartonSrc;}
 const NOM={1:'Apertura',2:'Jedi + Ludopalooza',3:'Darío Cuesta',4:'Luis Galáz',5:'Jackfredo',6:'Marcas',7:'Premiación'};
 const S=[
 {n:1,tit:'FRIKITAL FEST 2026 · EN VIVO',gc:[['PENDIENTE_NOMBRE_CONDUCTOR','CONDUCTOR/A','Conductor/a'],['PENDIENTE_JACKFREDO_CONFIRMAR_EN_RECINTO','ILUSTRADOR','Jackfredo (opcional)','Solo si está confirmado en el recinto']],pl:[['2.ª edición · Desde las 10:00 · Santo Tomás Talca','Datos del festival'],['Área de Comunicación y Diseño + Área de Informática','Organizadores','ORGANIZAN'],['Aprendizaje práctico · Trabajo colaborativo · Comunidad','Aprendizaje']]},
@@ -11,12 +13,12 @@ const S=[
 {n:7,tit:'CEREMONIA DE PREMIACIÓN',gc:[['Jorge Córdova Pacheco','DIRECTOR DE CARRERA · DISEÑO GRÁFICO','Jorge Córdova Pacheco','Confirmar cargo']],pl:[['PENDIENTE_CATEGORIA','Categoría'],['PENDIENTE_GANADOR','Ganador/a (según acta oficial)'],['PENDIENTE_FOTO_GRUPAL','Foto grupal']]}];
 function armar(){const g=[];S.forEach(s=>{const p='s'+s.n+'_',ad=(id,nombre,tipo,tecla,t,x)=>g.push({id:p+id,nombre,tipo,tecla,sn:s.n,t,...x}),f=s.n===7;
  ad('ci','Cartón inicio','carton','F13',{});
- ad('ma','Motion apertura','motion','F14',{src:'PENDIENTE_ARCHIVO_MOTION_APERTURA'},{fondo:'alfa',fin:'ocultar',nota:'Archivo pendiente: súbelo a la carpeta media de GitHub y elígelo aquí'});
+ ad('ma','Motion apertura','motion','F14',{src:'motion_apertura.mp4'},{fondo:'alfa',fin:'ocultar'});
  ad('tit','Título GC','titulo','F15',{a:s.tit},{color:'magenta'});
  s.gc.forEach((x,i)=>ad('gc'+(i+1),x[2],'rotulo',['F16','F17','F18'][i],{a:x[0],b:x[1]},{var:'gc',color:'azul',nota:x[3]}));
  s.pl.forEach((x,i)=>ad('pl'+(i+1),x[1],'rotulo',['F19','F22','F23'][i],{a:x[0],b:x[2]||''},{var:'apoyo',color:'azul'}));
  ad('mc',f?'Motion final':'Motion cierre','motion','F20',{src:'PENDIENTE_ARCHIVO_'+(f?'MOTION_FINAL':'MOTION_CIERRE')},{fondo:'alfa',fin:'ocultar',nota:'Archivo pendiente: súbelo a la carpeta media de GitHub y elígelo aquí'});
- ad('cc',f?'Cartón final':'Cartón cierre','carton','F21',{},f?{nota:'Cartón final con logos: pendiente de diseño y orden de logos'}:{});});return g;}
+ ad('cc',f?'Cartón final':'Cartón cierre','carton','F21',{},f?{nota:'Usa el mismo cartón que el inicio. Cartón final con logos de auspiciadores: pendiente de definir'}:{});});return g;}
 const DEF={graficas:armar(),aire:{},tema:'turquesa',paso:{n:1,i:0},ver:VER};
 const Estado=(()=>{
   const K='frk_estado_v'+VER,bc=new BroadcastChannel('frk_'+VER+CANAL),subs=[],gu=[];

@@ -1,5 +1,6 @@
+@font-face{font-family:'A4Speed';src:url('../fonts/A4SPEED-Bold.ttf') format('truetype');font-display:block}
 /* Salida OBS v2 · 1920x1080 transparente · línea cómic/pop Frikital */
-:root{--bg:radial-gradient(ellipse at 50% 42%,#9358d8 0,#5B2A9E 36%,#2c1259 100%);--dots:rgba(230,23,127,.55);--m:#B8349A;--m2:#962e79;--m3:#6e1f59;--logosh:#1b0a3d;--violeta:#5B2A9E;--oscuro:#2c1259;--magenta:#E6177F;--azul:#1FA8F0;--f:'Saira','Poppins','Montserrat','Arial Black',Impact,sans-serif;--e:cubic-bezier(.2,.9,.2,1.08)}
+:root{--bg:radial-gradient(ellipse at 50% 42%,#9358d8 0,#5B2A9E 36%,#2c1259 100%);--dots:rgba(230,23,127,.55);--m:#B8349A;--m2:#962e79;--m3:#6e1f59;--logosh:#1b0a3d;--violeta:#5B2A9E;--oscuro:#2c1259;--magenta:#E6177F;--azul:#1FA8F0;--f:'A4Speed','Arial Black',Impact,sans-serif;--e:cubic-bezier(.2,.9,.2,1.08)}
 html,body{font-stretch:125%;margin:0;width:1920px;height:1080px;overflow:hidden;background:transparent;font-family:var(--f)}
 body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/60px 60px}
 #escena,.capa{position:absolute;inset:0;width:1920px;height:1080px}
@@ -29,7 +30,7 @@ body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/6
 .logo i{display:inline-block;margin-top:12px;background:#0a0a12;border:5px solid #fff;padding:0 34px;font-size:52px;box-shadow:7px 7px 0 var(--magenta);animation:caer .6s .6s var(--e) both}
 @keyframes caer{from{opacity:0;transform:translateY(-260px) scale(1.4) skewX(-12deg)}}
 .lema{position:absolute;left:0;right:0;top:575px;font-size:66px;line-height:1}
-.lema span{display:inline-block;background:#1b1b6e;border:6px solid var(--azul);padding:4px 44px;box-shadow:8px 8px 0 #0a0a3a}
+.lema>span{display:inline-block;background:#1b1b6e;border:6px solid var(--azul);padding:4px 44px;box-shadow:8px 8px 0 #0a0a3a}
 .lema .l1{transform:skewX(-8deg);animation:izq .6s .9s var(--e) both}.lema .l2{transform:skewX(-8deg);animation:izq .6s 1.25s var(--e) both}
 @keyframes izq{from{opacity:0;translate:-700px}}
 .lema em{display:block;font-size:210px;line-height:.95;color:var(--magenta);-webkit-text-stroke:9px #fff;paint-order:stroke fill;text-shadow:10px 10px 0 #1b1b6e,0 0 50px #E6177F;animation:boom .7s 1.05s var(--e) both}
@@ -85,3 +86,25 @@ body.cuadros{background:repeating-conic-gradient(#3a3a3a 0 25%,#222 0 50%) 0 0/6
 .mov{position:absolute;inset:0}.mov video,.mov img,.mov canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:contain}
 .mov.entra{animation:fade .4s both}.mov.sale{animation:fadeo .4s both}
 .capa-carton{z-index:1}.capa-motion{z-index:4}.capa-titulo,.capa-rotulo{z-index:6}
+
+/* Fuente de los GC (A4 Speed): ya viene inclinada y en un solo peso */
+.gc,.titulo,.apoyo{font-family:'A4Speed','Poppins',sans-serif;font-style:normal;font-weight:400;font-synthesis:none;letter-spacing:.03em}
+.titulo .placa{text-transform:none;letter-spacing:.04em;font-size:54px}.titulo .placa span{transform:skewX(10deg)}
+.gc .car{text-transform:none;font-size:32px}.apoyo .ah span{text-transform:none;font-size:30px}.gc .nom{font-size:66px}.apoyo .at span{font-size:46px}
+.ac{position:relative;display:inline-block}.ac::after{content:attr(data-m);position:absolute;font-size:1em;line-height:inherit;left:.23em;top:-.125em}.ac.u::after{left:.26em;top:-.28em}
+.ac[data-m="~"]::after{left:.04em;top:-.31em}.ac.u[data-m="~"]::after{left:.05em;top:-.47em}.ac[data-m='"']::after{left:.16em}.ac.u[data-m='"']::after{left:.18em}
+.gc .car{padding-top:13px}.apoyo .ah span{padding-top:13px}
+.inv{display:inline-block;transform:rotate(180deg)}.pt{display:inline-block;width:.17em;height:.17em;margin:0 .4em;background:currentColor;vertical-align:.18em;transform:skewX(-12deg)}.sup{font-size:.6em;vertical-align:.5em}
+
+/* Rótulos: plantillas GC_2 (nombre) y GC_1 (apoyo) del cliente como video con alfa + texto editable */
+.gcv{position:absolute;inset:0}.gcv video{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.gtxt{position:absolute;inset:0;font-family:'A4Speed','Poppins',sans-serif;font-style:normal;font-weight:400;font-synthesis:none;color:#fff;letter-spacing:.03em}
+.gtxt>span{position:absolute;white-space:nowrap;opacity:0;transform:translateY(24px);transition:opacity .35s,transform .4s var(--e)}
+.gcv.on .gtxt>span{opacity:1;transform:none}.gcv.out .gtxt>span{opacity:0;transform:none;transition:opacity .18s}
+.nm .n{left:405px;top:755px;line-height:115px;font-size:64px}.nm .c{left:400px;top:874px;width:610px;height:78px;display:flex;align-items:center;white-space:normal;line-height:1.12;font-size:32px;letter-spacing:.05em}
+.ap .m{left:245px;top:827px;width:1250px;height:158px;display:flex;align-items:center;white-space:normal;line-height:1.08;font-size:64px}.ap.hh .m{top:876px;height:106px;font-size:56px}.ap .h{left:250px;top:834px;line-height:34px;font-size:28px;color:#ff8ac8;letter-spacing:.06em}
+.fit>i{display:block;font-style:normal}
+
+/* Fuente única A4 Speed también en el cartón diseñado */
+.carton{font-family:'A4Speed','Arial Black',sans-serif;font-style:normal;font-weight:400;font-synthesis:none;letter-spacing:.02em}
+.carton .lema{font-size:60px}.carton .lema em{font-size:200px;letter-spacing:.02em}.carton .logo i{font-size:48px}.carton .pie{font-size:30px;letter-spacing:.05em}

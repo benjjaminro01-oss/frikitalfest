@@ -28,3 +28,5 @@ dialog{background:var(--bg);color:var(--t);border:1px solid var(--l);border-radi
 body[data-solo="1"] #vistas{display:none}.bots>div>.bt{width:100%}
 #mons{position:sticky;top:64px;z-index:4;background:var(--bg);padding:0 14px}.mons{padding:6px 0 8px;margin:0 0 8px;border-bottom:1px solid var(--l)}.mon{max-width:440px;min-width:240px}
 .lb{display:grid;gap:2px}.lb span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.7}
+@font-face{font-family:'A4Speed';src:url('../fonts/A4SPEED-Bold.ttf') format('truetype');font-display:swap}
+.logo{font-family:'A4Speed',system-ui,sans-serif;font-style:normal;letter-spacing:.06em}
